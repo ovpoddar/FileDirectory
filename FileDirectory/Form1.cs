@@ -29,7 +29,9 @@ namespace FileDirectory
             Input.Text = _path;
         }
 
-        private void Input_TextChanged(object sender, EventArgs e) =>
+        private void Input_TextChanged(object sender, EventArgs e)
+        {
             _path = Input.Text;
+        }
     }
 }

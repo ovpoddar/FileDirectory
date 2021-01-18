@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 
 namespace FileDirectory.Helpers
 {
@@ -26,15 +25,9 @@ namespace FileDirectory.Helpers
                 foreach (var item in Directory.GetFiles(path))
                     result += $"{space} {Path.GetFileName(item)} {Environment.NewLine}";
 
-
-                //var files = Directory.GetFiles(path).ToArray();
-
-                //var c =  files.Aggregate((s1, s2) => Path.GetFileName(s1) + Environment.NewLine + Path.GetFileName(s2));
-
-                //result += c;
                 return result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 if (ex.GetType().Name == "UnauthorizedAccessException")
                     return "";
