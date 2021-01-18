@@ -29,9 +29,7 @@ namespace FileDirectory.Helpers
             }
             catch (Exception ex)
             {
-                if (ex.GetType().Name == "UnauthorizedAccessException")
-                    return "";
-                return ex.Message;
+                return ex.GetType().Name == "UnauthorizedAccessException" ? "" : ex.Message;
             }
         }
     }
