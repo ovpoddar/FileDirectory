@@ -59,6 +59,7 @@ namespace FileDirectory
             this.Output.Multiline = true;
             this.Output.Name = "Output";
             this.Output.ReadOnly = true;
+            this.Output.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.Output.Size = new System.Drawing.Size(775, 396);
             this.Output.TabIndex = 2;
             // 

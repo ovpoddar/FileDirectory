@@ -24,13 +24,16 @@ namespace FileDirectory.Helpers
                 }
 
                 foreach (var item in Directory.GetFiles(path))
+                {
+                    //result.Aggregate((e1, e2) => space + 
                     result += $"{space} {Path.GetFileName(item)} {Environment.NewLine}";
+                }
 
                 return result;
             }
             catch(Exception ex)
             {
-                if(ex.GetType().Name == "UnauthorizedAccessException")
+                if (ex.GetType().Name == "UnauthorizedAccessException")
                     return "";
                 return ex.Message;
             }
