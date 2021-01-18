@@ -8,6 +8,7 @@ namespace FileDirectory
     public partial class Form1 : Form
     {
         private string _path { get; set; }
+
         public Form1()
         {
             InitializeComponent();
@@ -29,9 +30,7 @@ namespace FileDirectory
             Input.Text = _path;
         }
 
-        private void Input_TextChanged(object sender, EventArgs e)
-        {
+        private void Input_TextChanged(object sender, EventArgs e) =>
             _path = Input.Text;
-        }
     }
 }
