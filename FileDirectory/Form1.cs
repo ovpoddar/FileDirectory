@@ -17,10 +17,11 @@ namespace FileDirectory
 
         private void button_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(_path) && Filehelper.IsAccessible(_path))
+            var filehelper = new Filehelper();
+            if (Directory.Exists(_path) && filehelper.IsAccessible(_path))
             {
                 UiAccess(false);
-                var responce = Filehelper.SearchDirectory(_path, 0);
+                var responce = filehelper.SearchDirectory(_path, 0);
                 Output.Text = responce;
                 UiAccess(true);
             }

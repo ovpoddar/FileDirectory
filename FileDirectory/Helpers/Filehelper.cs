@@ -3,9 +3,9 @@ using System.IO;
 
 namespace FileDirectory.Helpers
 {
-    public static class Filehelper
+    public class Filehelper : IFilehelper
     {
-        public static string SearchDirectory(string path, uint depth)
+        public string SearchDirectory(string path, uint depth)
         {
             var result = "";
             var space = "";
@@ -27,7 +27,7 @@ namespace FileDirectory.Helpers
             return result;
         }
 
-        public static bool IsAccessible(string path)
+        public bool IsAccessible(string path)
         {
             try
             {
