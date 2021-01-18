@@ -21,7 +21,6 @@ namespace FileDirectory.Helpers
                     result += $"{space} {Path.GetFileName(item)} {Environment.NewLine}";
                     result += SearchDirectory(item, depth);
                 }
-                continue;
             }
 
             foreach (var item in Directory.GetFiles(path))
