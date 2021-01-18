@@ -1,6 +1,7 @@
 ﻿using FileDirectory.Helpers;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FileDirectory
@@ -17,7 +18,12 @@ namespace FileDirectory
         private void button_Click(object sender, EventArgs e)
         {
             if (Directory.Exists(_path) && Filehelper.IsAccessible(_path))
-                Output.Text = Filehelper.SearchDirectory(_path, 0);
+            {
+                UiAccess(false);
+                var responce = Filehelper.SearchDirectory(_path, 0);
+                Output.Text = responce;
+                UiAccess(true);
+            }
             else
                 MessageBox.Show("no directory found");
         }
@@ -32,5 +38,12 @@ namespace FileDirectory
 
         private void Input_TextChanged(object sender, EventArgs e) =>
             _path = Input.Text;
+
+        private void UiAccess(bool state)
+        {
+            Input.Enabled = state;
+            button.Enabled = state;
+            Input.Enabled = state;
+        }
     }
 }
