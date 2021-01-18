@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace FileDirectory.Helpers
 {
@@ -21,10 +22,8 @@ namespace FileDirectory.Helpers
                 result += SearchDirectory(item, depth);
             }
 
-            foreach (var item in Directory.GetFiles(path))
-                result += $"{space} {Path.GetFileName(item)} {Environment.NewLine}";
-
-            return result;
+            return Directory.GetFiles(path).Aggregate(result, 
+                                                        (current, item) => current + $"{space} {Path.GetFileName(item)} {Environment.NewLine}");
         }
 
         public bool IsAccessible(string path)
