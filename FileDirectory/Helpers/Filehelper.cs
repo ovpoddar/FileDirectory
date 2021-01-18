@@ -10,7 +10,7 @@ namespace FileDirectory.Helpers
             var result = "";
             var space = "";
 
-            for (uint i = 0; i < depth; i++)
+            for (var i = 0; i < depth; i++)
                 space += "\t";
             depth++;
 
