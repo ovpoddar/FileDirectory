@@ -24,11 +24,14 @@ namespace FileDirectory.Helpers
                 }
 
                 foreach (var item in Directory.GetFiles(path))
-                {
-                    //result.Aggregate((e1, e2) => space + 
                     result += $"{space} {Path.GetFileName(item)} {Environment.NewLine}";
-                }
 
+
+                //var files = Directory.GetFiles(path).ToArray();
+
+                //var c =  files.Aggregate((s1, s2) => Path.GetFileName(s1) + Environment.NewLine + Path.GetFileName(s2));
+
+                //result += c;
                 return result;
             }
             catch(Exception ex)
