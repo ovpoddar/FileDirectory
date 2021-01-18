@@ -24,11 +24,9 @@ namespace FileDirectory
         private void Openfile_Click(object sender, EventArgs e)
         {
             var folder = new FolderBrowserDialog();
-            if (folder.ShowDialog() == DialogResult.OK)
-            {
-                _path = folder.SelectedPath;
-                Input.Text = _path;
-            }
+            if (folder.ShowDialog() != DialogResult.OK) return;
+            _path = folder.SelectedPath;
+            Input.Text = _path;
         }
 
         private void Input_TextChanged(object sender, EventArgs e) =>
