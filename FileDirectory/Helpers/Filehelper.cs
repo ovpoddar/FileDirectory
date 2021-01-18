@@ -16,11 +16,9 @@ namespace FileDirectory.Helpers
 
             foreach (var item in Directory.GetDirectories(path))
             {
-                if (IsAccessible(item))
-                {
-                    result += $"{space} {Path.GetFileName(item)} {Environment.NewLine}";
-                    result += SearchDirectory(item, depth);
-                }
+                if (!IsAccessible(item)) continue;
+                result += $"{space} {Path.GetFileName(item)} {Environment.NewLine}";
+                result += SearchDirectory(item, depth);
             }
 
             foreach (var item in Directory.GetFiles(path))
