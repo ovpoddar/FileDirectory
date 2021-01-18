@@ -16,7 +16,7 @@ namespace FileDirectory
 
         private void button_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(_path))
+            if (Directory.Exists(_path) && Filehelper.IsAccessible(_path))
                 Output.Text = Filehelper.SearchDirectory(_path, 0);
             else
                 MessageBox.Show("no directory found");

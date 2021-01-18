@@ -10,17 +10,18 @@ namespace FileDirectory.Helpers
             var result = "";
             var space = "";
 
-            if (!IsAccessible(path))
-                return result;
-
             for (uint i = 0; i < depth; i++)
                 space += "\t";
             depth++;
 
             foreach (var item in Directory.GetDirectories(path))
             {
-                result += $"{space} {Path.GetFileName(item)} {Environment.NewLine}";
-                result += SearchDirectory(item, depth);
+                if (IsAccessible(item))
+                {
+                    result += $"{space} {Path.GetFileName(item)} {Environment.NewLine}";
+                    result += SearchDirectory(item, depth);
+                }
+                continue;
             }
 
             foreach (var item in Directory.GetFiles(path))
@@ -34,7 +35,7 @@ namespace FileDirectory.Helpers
             try
             {
                 Directory.GetDirectories(path);
-                return true;
+                return Path.GetFileName(path).Trim().ToLower() != "$RECYCLE.BIN".ToLower();
             }
             catch
             {
