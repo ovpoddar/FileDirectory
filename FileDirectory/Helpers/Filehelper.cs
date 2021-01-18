@@ -7,29 +7,37 @@ namespace FileDirectory.Helpers
     {
         public static string SearchDirectory(string path, uint depth)
         {
+            var result = "";
+            if (!IsAccessible(path))
+                return result;
+            var space = "";
+
+            for (uint i = 0; i < depth; i++)
+                space += "\t";
+            depth++;
+
+            foreach (var item in Directory.GetDirectories(path))
+            {
+                result += $"{space} {Path.GetFileName(item)} {Environment.NewLine}";
+                result += SearchDirectory(item, depth);
+            }
+
+            foreach (var item in Directory.GetFiles(path))
+                result += $"{space} {Path.GetFileName(item)} {Environment.NewLine}";
+
+            return result;
+        }
+
+        public static bool IsAccessible(string path)
+        {
             try
             {
-                var result = "";
-                var space = "";
-
-                for (uint i = 0; i < depth; i++)
-                    space += "\t";
-                depth++;
-
-                foreach (var item in Directory.GetDirectories(path))
-                {
-                    result += $"{space} {Path.GetFileName(item)} {Environment.NewLine}";
-                    result += SearchDirectory(item, depth);
-                }
-
-                foreach (var item in Directory.GetFiles(path))
-                    result += $"{space} {Path.GetFileName(item)} {Environment.NewLine}";
-
-                return result;
+                Directory.GetDirectories(path);
+                return true;
             }
-            catch (Exception ex)
+            catch
             {
-                return ex.GetType().Name == "UnauthorizedAccessException" ? "" : ex.Message;
+                return false;
             }
         }
     }
