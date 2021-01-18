@@ -23,7 +23,7 @@ namespace FileDirectory
 
         private void Openfile_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog folder = new FolderBrowserDialog();
+            var folder = new FolderBrowserDialog();
             if (folder.ShowDialog() == DialogResult.OK)
             {
                 _path = folder.SelectedPath;
