@@ -8,9 +8,10 @@ namespace FileDirectory.Helpers
         public static string SearchDirectory(string path, uint depth)
         {
             var result = "";
+            var space = "";
+
             if (!IsAccessible(path))
                 return result;
-            var space = "";
 
             for (uint i = 0; i < depth; i++)
                 space += "\t";
