@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FileDirectory.Helpers;
+using System;
 using System.IO;
 using System.Windows.Forms;
 
@@ -6,6 +7,7 @@ namespace FileDirectory
 {
     public partial class Form1 : Form
     {
+        private string _path { get; set; }
         public Form1()
         {
             InitializeComponent();
@@ -13,34 +15,25 @@ namespace FileDirectory
 
         private void button_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(Input.Text))
-                Output.Text = SearchDirectory(Input.Text, 0);
+            if (Directory.Exists(_path))
+                Output.Text = Filehelper.SearchDirectory(_path, 0);
             else
                 MessageBox.Show("no directory found");
         }
 
-        private string SearchDirectory(string path, uint depth)
+        private void Openfile_Click(object sender, EventArgs e)
         {
-            var result = "";
-            var space = "";
-
-
-            for (uint i = 0; i < depth; i++)
-                space += "\t";
-            depth += 1;
-
-
-            foreach (var item in Directory.GetDirectories(path))
+            FolderBrowserDialog folder = new FolderBrowserDialog();
+            if (folder.ShowDialog() == DialogResult.OK)
             {
-                result += $"{space} {Path.GetFileName(item)} {Environment.NewLine}";
-                result += SearchDirectory(item, depth);
+                _path = folder.SelectedPath;
+                Input.Text = _path;
             }
+        }
 
-
-            foreach (var item in Directory.GetFiles(path))
-                result += $"{space} {Path.GetFileName(item)} {Environment.NewLine}";
-
-            return result;
+        private void Input_TextChanged(object sender, EventArgs e)
+        {
+            _path = Input.Text;
         }
     }
 }
